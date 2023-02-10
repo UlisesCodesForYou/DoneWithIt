@@ -1,37 +1,9 @@
-import { StyleSheet, View } from "react-native";
+import { StatusBar, StyleSheet, Text, View } from "react-native";
 
 export default function App() {
   return (
-    <View
-      style={{
-        backgroundColor: "white",
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <View
-        style={{
-          backgroundColor: "dodgerblue",
-          width: 100,
-          height: 100,
-        }}
-      />
-      <View
-        style={{
-          backgroundColor: "gold",
-          width: 100,
-          height: 100,
-        }}
-      />
-      <View
-        style={{
-          backgroundColor: "tomato",
-          width: 100,
-          height: 100,
-        }}
-      />
+    <View style={styles.container}>
+      <Text style={{ height: 40, borderWidth: 1 }}>Here's some text!</Text>
     </View>
   );
 }
