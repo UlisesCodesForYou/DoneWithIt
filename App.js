@@ -1,18 +1,23 @@
-import { StatusBar, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, TextInput, View, Button, Text } from "react-native";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={{ height: 40, borderWidth: 1 }}>Here's some text!</Text>
+    <View style={styles.appContainer}>
+      <View>
+        <TextInput placeholder="Your goals" />
+        <Button title="Add your goal" />
+      </View>
+      <View>
+        <Text>List of goals...</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
+  appContainer: {
+    padding: 50,
   },
 });
+
+// There ain't no css in native. Above is the best way to add styles.  I can add inline styles, but that'll be hard to read.
