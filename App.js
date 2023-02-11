@@ -1,12 +1,6 @@
 import { useState } from "react";
-import {
-  Button,
-  FlatList,
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-} from "react-native";
+import { Button, FlatList, StyleSheet, TextInput, View } from "react-native";
+import GoalItem from "./components/GoalItem";
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState("");
@@ -36,11 +30,7 @@ export default function App() {
           data={courseGoals} /// This points to the data that I want to pass onto the list.
           renderItem={(itemData) => {
             // This render function tells FlatList how to render the list. itemData is an obj
-            return (
-              <View style={styles.goalItem}>
-                <Text style={styles.goalText}>{itemData.item.text}</Text>
-              </View>
-            );
+            return <GoalItem text={itemData.item.text} />;
           }}
           keyExtractor={(item, index) => {
             return item.id;
@@ -78,17 +68,6 @@ const styles = StyleSheet.create({
 
   goalsContainer: {
     flex: 5,
-  },
-
-  goalItem: {
-    margin: 8,
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: "#5e08cc",
-  },
-
-  goalText: {
-    color: "white",
   },
 });
 
