@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Button, FlatList, StyleSheet, TextInput, View } from "react-native";
+import { Button, FlatList, StyleSheet, View, Modal } from "react-native";
 import GoalItem from "./components/GoalItem";
+import GoalInput from "./components/GoalInput";
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState("");
@@ -15,14 +16,17 @@ export default function App() {
       { text: enteredGoalText, id: Math.random().toString() },
     ]);
   };
+
+  const deleteGoalHandler = (id) => {
+    setCourseGoals((currentCourseGoals) => {
+      return currentCourseGoals.filter((goal) => goal.id !== id);
+    });
+  };
+
   return (
     <View style={styles.appContainer}>
       <View style={styles.goalContainer}>
-        <TextInput
-          placeholder="Your goals"
-          style={styles.textInput}
-          onChangeText={goalInputHandler}
-        />
+        <GoalInput inputHandler={goalInputHandler} />
         <Button title="Add goal" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
@@ -30,7 +34,13 @@ export default function App() {
           data={courseGoals} /// This points to the data that I want to pass onto the list.
           renderItem={(itemData) => {
             // This render function tells FlatList how to render the list. itemData is an obj
-            return <GoalItem text={itemData.item.text} />;
+            return (
+              <GoalItem
+                text={itemData.item.text}
+                onDeleteItem={deleteGoalHandler}
+                id={itemData.item.id}
+              />
+            );
           }}
           keyExtractor={(item, index) => {
             return item.id;
@@ -56,14 +66,6 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     borderBottomWidth: 1,
     borderBottomColor: "#cccccc",
-  },
-
-  textInput: {
-    borderColor: "#cccccc",
-    borderWidth: 1,
-    width: "70%",
-    marginRight: 8,
-    padding: 8,
   },
 
   goalsContainer: {
